@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Soundboard Resource Pack Generator</title>
+  <link rel="stylesheet" href="/soundboard-pack-generator/src/style.css">
+</head>
+<body>
+
+<h1>🎵 Soundboard Resource Pack Generator</h1>
+
+<input type="file" id="files" multiple accept=".ogg,.mp3,.wav" />
+
+<button id="generate">Générer le resource pack</button>
+
+<p id="status"></p>
+
+<div class="progress">
+  <div id="bar"></div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
