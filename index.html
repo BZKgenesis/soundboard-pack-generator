@@ -2,23 +2,45 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Soundboard Resource Pack Generator</title>
-  <link rel="stylesheet" href="/soundboard-pack-generator/src/style.css">
-  <script type="module" crossorigin src="./assets/index-BLX52WOo.js"></script>
+
+
+  <script type="importmap">
+  {
+    "imports": {
+      "jszip": "https://unpkg.com/jszip@3.10.1/dist/jszip.min.js",
+      "@ffmpeg/ffmpeg": "https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js",
+      "@ffmpeg/util": "https://unpkg.com/@ffmpeg/util@0.12.1/dist/esm/index.js",
+      "@ffmpeg/core": "https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js"
+    }
+  }
+  </script>
+  <script type="module" crossorigin src="./assets/index-DMoTNsGD.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-jLlmT1KB.css">
 </head>
 <body>
 
 <h1>🎵 Soundboard Resource Pack Generator</h1>
 
+<label for="files" class="custom-file-upload">
+    Upload your audio files (.ogg, .wav, .mp3 only)
+</label>
 <input type="file" id="files" multiple accept=".ogg,.mp3,.wav" />
-
-<button id="generate">Générer le resource pack</button>
-
-<p id="status"></p>
-
-<div class="progress">
-  <div id="bar"></div>
+<div>
+  <p>Sound's names: </p>
+  <ul id="fileSelected"></ul>
 </div>
+<button id="generate" disabled>Generate the resource pack</button>
+
+<p id="status">En attente...</p>
+
+<div class="progress" style="width: 100%; background: #ccc; height: 20px; margin-top: 10px;">
+  <div id="bar" style="width: 0%; background: #4caf50; height: 100%;"></div>
+</div>
+
+<script src="./coi-serviceworker.js"></script>
+
 
 </body>
 </html>
