@@ -10,6 +10,10 @@ const filesInput = document.getElementById("files");
 const button = document.getElementById("generate");
 const status = document.getElementById("status");
 const bar = document.getElementById("bar");
+const fileSelected = document.getElementById("fileSelected");
+var buttons = []
+
+var titles = Array();
 
 function setProgress(p) {
     bar.style.width = `${p}%`;
@@ -61,6 +65,65 @@ async function convertToOgg(file) {
     return new File([data.buffer], finalName, { type: "audio/ogg" });
 }
 
+filesInput.onchange = (event) => {
+    titles = [];
+    fileSelected.textContent = "";
+    const files = Array.from(event.target.files);
+    const buttons = [];
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const finalName = file.name.substring(0, file.name.lastIndexOf('.'));
+        titles.push(finalName);
+
+        const li = document.createElement("li");
+        const liInput = document.createElement("input");
+        liInput.value = finalName;
+        liInput.className = "file-name-input";
+
+        // bouton preview
+        const playBtn = document.createElement("button");
+        playBtn.textContent = "▶";
+        playBtn.type = "button";
+        playBtn.className = "preview-btn";
+
+        let audio = null;
+
+        playBtn.onclick = () => {
+            // stop si déjà en lecture
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+                audio = null;
+                return;
+            }
+
+            const url = URL.createObjectURL(file);
+            audio = new Audio(url);
+            audio.play();
+
+            audio.onended = () => {
+                URL.revokeObjectURL(url);
+                audio = null;
+            };
+        };
+
+        // Avec `let i`, chaque callback capture la bonne valeur
+        liInput.oninput = (event) => {
+            titles[i] = event.target.value;
+            console.log(titles);
+        }
+
+        buttons.push(liInput);
+        li.appendChild(playBtn);
+        li.appendChild(liInput);
+        fileSelected.appendChild(li);
+    }
+    button.disabled = false;
+
+    console.log(titles);
+}
+
 button.onclick = async () => {
     const files = Array.from(filesInput.files);
     if (files.length === 0) {
@@ -76,6 +139,7 @@ button.onclick = async () => {
 
         const zip = new JSZip();
         const sounds = {};
+        const lang = {};
         const soundsFolder = zip.folder("assets/soundboard/sounds");
 
         let index = 0;
@@ -90,13 +154,15 @@ button.onclick = async () => {
             }
 
             // Nettoyage du nom pour l'ID (minuscules, pas d'espaces pour Minecraft)
+            const slotId = "slot_" + ("00"+index).slice(-3);
             const cleanName = oggFile.name.replace(".ogg", "").toLowerCase().replace(/[^a-z0-9_]/g, "_");
             const namespace = "soundboard"; // Change ceci si tu utilises un namespace perso
 
-            sounds[cleanName] = {
-                category: "record", // ou "master", "music", etc.
+            sounds[slotId] = {
+                // category: "record", // ou "master", "music", etc.
                 sounds: [`${namespace}:${cleanName}`],
             };
+            lang["soundboard.sound."+ slotId] = titles[index];
 
             // Ajout au zip
             soundsFolder.file(`${cleanName}.ogg`, await oggFile.arrayBuffer());
@@ -106,9 +172,15 @@ button.onclick = async () => {
         }
 
         // Création du sounds.json
-        zip.folder(`assets/${"minecraft"}`).file(
+        zip.folder('assets/soundboard').file(
             "sounds.json",
             JSON.stringify(sounds, null, 2)
+        );
+
+
+        zip.folder('assets/soundboard/lang').file(
+            "en_us.json",
+            JSON.stringify(lang, null, 2)
         );
 
         zip.file(

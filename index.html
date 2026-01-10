@@ -21,8 +21,15 @@
 
 <h1>🎵 Soundboard Resource Pack Generator</h1>
 
+<label for="files" class="custom-file-upload">
+    Upload your audio files (.ogg, .wav, .mp3 only)
+</label>
 <input type="file" id="files" multiple accept=".ogg,.mp3,.wav" />
-<button id="generate">Générer le resource pack</button>
+<div>
+  <p>Sound's names: </p>
+  <ul id="fileSelected"></ul>
+</div>
+<button id="generate" disabled>Generate the resource pack</button>
 
 <p id="status">En attente...</p>
 

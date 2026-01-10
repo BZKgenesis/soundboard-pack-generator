@@ -9,6 +9,7 @@ button {
   margin-top: 15px;
   padding: 10px 20px;
   font-size: 16px;
+    cursor: pointer;
 }
 
 .progress {
@@ -25,4 +26,40 @@ button {
   width: 0%;
   background: #4caf50;
   transition: width 0.2s;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.file-name-input{
+  background-color: transparent;
+  color: #ccc;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+ul {
+  list-style: decimal;
+}
+
+
+#fileSelected li {
+    display: flex;
+    align-items: end;
+    vertical-align: middle;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.preview-btn {
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 14px;
 }
