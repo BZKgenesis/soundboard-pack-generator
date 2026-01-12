@@ -16,14 +16,33 @@
     }
   }
   </script>
-  <script type="module" crossorigin src="./assets/index-DMoTNsGD.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-jLlmT1KB.css">
+  <script type="module" crossorigin src="./assets/index-B0ZVKlfu.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-ZV-yzmZF.css">
 </head>
 <body>
 
 <h1>🎵 Soundboard Resource Pack Generator</h1>
-
+<div id="french" style="display: none;">
+  <button id="toEnglish">Switch to English 🇬🇧/🇺🇸</button>
+  <h3>Instructions</h3>
+  <p>Ceci est un outil qui permet de générer des ressources pack compatible avec le mod : <a href="https://www.curseforge.com/minecraft/mc-mods/bzk-soundboard">https://www.curseforge.com/minecraft/mc-mods/bzk-soundboard</a>.</p>
+  <p style="max-width:750px" >Vous devez sélectionner les audios que vous voulez mettre dans votre soundboard. Une fois sélectionnés, vous pouvez changer le nom des sons qui apparaîtront dans le menu en jeu.<br> Une fois terminé vous pouvez télécharger le ressource pack et le mettre dans le dossier de vos ressources pack classique.</p>
+  <p>Vous pouvez choisir des fichiers de type .mp3 .wav et .ogg ils seront tous automatiquement convertis en .ogg</p>
+  <p style="font-style: italic;color:#ccc" >Si vous avez un quelconque problème, n'hésitez pas à faire un ticket sur le dépôt github. <a href="https://github.com/BZKgenesis/soundboard-pack-generator/issues/new/choose">https://github.com/BZKgenesis/soundboard-pack-generator/issues/new/choose</a></p>
+</div>
+<div id="english" style="display:block">
+  <button id="toFrench">Basculer en français 🇫🇷</button>
+  <h3>Instructions</h3>
+  <p>This is a tool that allows you to generate resource packs compatible with the mod: <a href="https://www.curseforge.com/minecraft/mc-mods/bzk-soundboard">https://www.curseforge.com/minecraft/mc-mods/bzk-soundboard</a>.</p>
+  <p style="max-width:750px" >You need to select the audio files you want to include in your soundboard. Once selected, you can change the names of the sounds that will appear in the in-game menu.<br> Once finished, you can download the resource pack and place it in your usual resource packs folder.</p>
+  <p>You can choose files of type .mp3 .wav and .ogg they will all be automatically converted to .ogg</p>
+  <p style="font-style: italic;color:#ccc" >If you have any problems, feel free to open an issue on the github repository. <a href="https://github.com/BZKgenesis/soundboard-pack-generator/issues/new/choose">https://github.com/BZKgenesis/soundboard-pack-generator/issues/new/choose</a></p>
+</div>
 <label for="files" class="custom-file-upload">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+  <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+</svg>
     Upload your audio files (.ogg, .wav, .mp3 only)
 </label>
 <input type="file" id="files" multiple accept=".ogg,.mp3,.wav" />
@@ -39,8 +58,29 @@
   <div id="bar" style="width: 0%; background: #4caf50; height: 100%;"></div>
 </div>
 
+<footer>
+  <p style="font-size: 12px; color: #666;">Made by BZKgns</p>
+</footer>
+
 <script src="./coi-serviceworker.js"></script>
 
+<script>
+  let buttonFrench = document.getElementById("toFrench");
+  let buttonEnglish = document.getElementById("toEnglish");
+  let frenchDiv = document.getElementById("french");
+  let englishDiv = document.getElementById("english");
+
+  buttonFrench.addEventListener("click", () => {
+    frenchDiv.style.display = "block";
+    englishDiv.style.display = "none";
+  });
+
+  buttonEnglish.addEventListener("click", () => {
+    frenchDiv.style.display = "none";
+    englishDiv.style.display = "block";
+  });
+
+</script>
 
 </body>
 </html>
