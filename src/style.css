@@ -9,7 +9,7 @@ button {
   margin-top: 15px;
   padding: 10px 20px;
   font-size: 16px;
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .progress {
@@ -31,10 +31,19 @@ input[type="file"] {
     display: none;
 }
 .custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+  background-color: #f6f6f6;
+  color: #121212;
+  height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
 }
 
 .file-name-input{
